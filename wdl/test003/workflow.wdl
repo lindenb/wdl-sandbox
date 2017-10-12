@@ -25,14 +25,29 @@ output {
 	}
 }
 
+task run_on_chrom {
+File bedFile
+String chrom
+
+command <<<
+   grep -v -E '(browser|track)' ${bedFile} | awk -F '\t' '($1 == "${chrom}" )' | sort -t $'\t' -k1,1 -k2,2n > ${chrom}.bed
+>>>
+
+output {
+	 File chrombedFile = chrom + ".bed"
+	}
+}
 
 workflow wl {
 Int nLines
 
 call makebed { input: nLines=nLines}
 call distinct_chroms { input: bedFile=makebed.bedFile}
+scatter (chrom in distinct_chroms.chromosomes) {
+    call run_on_chrom { input: bedFile=makebed.bedFile,chrom=chrom }
+  }
 
  output {
-    distinct_chroms.chromosomes
+    run_on_chrom.chrombedFile
 }
 }

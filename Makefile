@@ -1,6 +1,6 @@
 version=29
-.PHONY=all clean
-SIMPLE_TESTS=$(addprefix test, 001 002 003)
+.PHONY=all clean clean-all
+SIMPLE_TESTS=$(addprefix test, 001 002 003 004 005)
 
 define simple 
 
@@ -22,5 +22,6 @@ bin/cromwell-${version}.jar:
 	wget -O "$@" "https://github.com/broadinstitute/cromwell/releases/download/${version}/cromwell-${version}.jar"
 	
 clean:
-	rm -v -f bin/cromwell-${version}.jar cromwell-executions  cromwell-workflow-logs out
-
+	rm -v -f  cromwell-executions  cromwell-workflow-logs out
+clean-all: clean
+	rm -v -f bin/cromwell-${version}.jar
