@@ -1,6 +1,6 @@
 version=29
 .PHONY=all clean clean-all
-SIMPLE_TESTS=$(addprefix test, 001 002 003 004 005 006)
+SIMPLE_TESTS=$(addprefix test, 001 002 003 004 005 006 007)
 
 define simple 
 
