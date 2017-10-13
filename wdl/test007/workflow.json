@@ -1,3 +1,6 @@
 {
-"wl.config":"wdl/test007/config.json"
+"wl.samples":[
+	{"name":"S1","fastqs":[["S1.R1.a.fq.gz","S1.R2.a.fq.gz"],["S1.R1.b.fq.gz","S1.R2.b.fq.gz"]]},
+	{"name":"S2","fastqs":[["S2.R1.a.fq.gz","S2.R2.a.fq.gz"]]}
+	]
 }

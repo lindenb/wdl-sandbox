@@ -1,16 +1,17 @@
 task echo_sample_name {
-	Object sample
+	String sample
 
 	command {
-	  	echo ${sample['name']}
+	  	echo ${sample}
 		}
 	}
 
 workflow wl {
-	File config
-	Map[String,Object] samples = read_json(config)
-
+	Array[Object] samples
 	scatter(sample in samples) {
-		call echo_sample_name {input:sample=sample  }
+   	 	String name = sample["name"]
+   	 	Array[Array[String]] fastqs = sample["fastqs"]
+
+		call echo_sample_name {input:sample=name  }
 	 	}
 	}
