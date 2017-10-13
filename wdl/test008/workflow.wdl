@@ -3,7 +3,7 @@ Int x
 Int y
 
 command <<<
-   echo "${x} + ${y}" | bc
+    echo "${x} + ${y}" | bc
 >>>
 
 }
